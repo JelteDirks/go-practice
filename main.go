@@ -55,10 +55,36 @@ func primitive_types() {
     var prim_uint uint16 // value 0. this int is unsigned
     fmt.Printf("%v %T\n", prim_uint, prim_uint)
 
-    arithmatics()
-}
+    var prim_str string = "Jeake!"
+    fmt.Printf("My nickname is: %v\n", prim_str)
+    fmt.Printf("What type is it actually? prim_str[2]=%v and type %T\n", prim_str[2], prim_str[2])
 
-func arithmatics() {
+    // strings are uint8/byte (UTF-8) arrays
+    // prim_str[2] = "d" <-- can not assign string to byte!
+    // prim_str[5] = "c" <-- but also: can not manipulate string value!
+
+    var prim_str2 string = " or just... Jelte"
+    fmt.Println(prim_str + prim_str2) // but we can... concatenate!
+    
+    var prim_rune rune = 'd' // rune is a type alias for uint32
+    fmt.Printf("Some rune shit? %v %T\n", prim_rune, prim_rune)
+
+    var name string = "Jelte"
+    var name_in_bytes = []byte(name)
+    fmt.Printf("My name in bytes: %v\n", name_in_bytes)
+    some_operators()
+    some_floatybois()
+}
+func some_floatybois() {
+    var x float32 = 3.14
+    var y float32 = 6.022e-23
+    var z float32 = 2.9E9 
+
+    fmt.Printf("3.14 = %v\n", x)
+    fmt.Printf("6.022e-23 = %v\n", y)
+    fmt.Printf("2.9E9 = %v\n", z)
+}
+func some_operators() {
     var x int8 = 10 // 1010
     var y int8 = 3 // 0011
     fmt.Printf("x = %v, y = %v\n", x, y)
@@ -79,8 +105,14 @@ func arithmatics() {
     fmt.Println(x | y)
     fmt.Print("x ^ y: ") // XOR: 1001
     fmt.Println(x ^ y)
-    fmt.Print("x ^& y: ") // AND NOT: 1000
+    fmt.Print("x &^ y: ") // AND NOT: 1000
     fmt.Println(x &^ y)
+
+    fmt.Print("y << 2: ") // Left SHIFT: 1100
+    fmt.Println(y << 2) 
+    
+    fmt.Print("y >> 2: ") // RIGHT SHIFT: 0000
+    fmt.Println(y >> 2) 
 
     // operating on 2 different types of int is not allowed!
     var a int8 = 10
