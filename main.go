@@ -15,6 +15,22 @@ var (
 )
 
 func main() { 
+    // primitive_types()
+    // constants()
+    // numbers_etc()
+    arrays_and_slices()
+}
+
+func arrays_and_slices() {
+    var my_grades = [2]float32 {9.5, 7.8} // contiguous in memory!
+    fmt.Printf("My grades: %v\n", my_grades)
+    
+    var grades_no_size = [...]float32 {9.5, 7.8} // or without size
+    grades_no_size[1] = 9.1
+    fmt.Printf("Grades no size: %v\n", grades_no_size)
+}
+
+func numbers_etc() {
     // block scoped variables inside func
     var thisisfloat32 float32 = 10
     var thisisfloat64 = 10.
@@ -38,11 +54,7 @@ func main() {
 
     var ascii_string int = 51 // conversion to ascii string
     fmt.Println(strconv.Itoa(ascii_string))
-
-    primitive_types()
-    constants()
 }
-
 func constants() {
     const dont_change int = 62
     fmt.Printf("Don't change this one! %v\n", dont_change)
@@ -50,10 +62,35 @@ func constants() {
     // const no_no = math.Sin(1.53) <-- needs evaluation, can not be constant!
     // use primitives boi!
     // implicit conversion when const a = 52 <-- replace all occurances of a
+
+    const (
+        a = iota // starts at 0
+        b = iota
+    )
+
+    fmt.Printf("a = %v, b = %v\n", a, b)
+    
+    // but...
+
+    const (
+        _ = iota // this is not stored
+        c = iota // starts at 1 now
+        d = iota
+    )
+
+    fmt.Printf("c = %v, d = %v\n", c, d)
+
+    // iota is a scoped incrementer ... ?
+
+    const (
+        lsb = 1 << iota
+        second_bit
+        third_bit
+        msb
+    )
+    var bit_pattern byte = lsb | second_bit | third_bit | msb
+    fmt.Printf("%b = %v\n", bit_pattern, bit_pattern)
 }
-
-
-
 
 func primitive_types() {
     var b bool = false
