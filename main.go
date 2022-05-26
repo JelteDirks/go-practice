@@ -40,7 +40,20 @@ func main() {
     fmt.Println(strconv.Itoa(ascii_string))
 
     primitive_types()
+    constants()
 }
+
+func constants() {
+    const dont_change int = 62
+    fmt.Printf("Don't change this one! %v\n", dont_change)
+    
+    // const no_no = math.Sin(1.53) <-- needs evaluation, can not be constant!
+    // use primitives boi!
+    // implicit conversion when const a = 52 <-- replace all occurances of a
+}
+
+
+
 
 func primitive_types() {
     var b bool = false
