@@ -59,8 +59,8 @@ func primitive_types() {
 }
 
 func arithmatics() {
-    x := 14
-    y := 3
+    var x int8 = 10 // 1010
+    var y int8 = 3 // 0011
     fmt.Printf("x = %v, y = %v\n", x, y)
     fmt.Print("x - y: ")
     fmt.Println(x - y)
@@ -72,16 +72,19 @@ func arithmatics() {
     fmt.Println(x * y)
     fmt.Print("x % y: ")
     fmt.Println(x % y)
-    fmt.Print("x & y: ")
+
+    fmt.Print("x & y: ") // AND: 0010
     fmt.Println(x & y)
-    fmt.Print("x | y: ")
+    fmt.Print("x | y: ") // OR: 1011
     fmt.Println(x | y)
+    fmt.Print("x ^ y: ") // XOR: 1001
+    fmt.Println(x ^ y)
+    fmt.Print("x ^& y: ") // AND NOT: 1000
+    fmt.Println(x &^ y)
 
     // operating on 2 different types of int is not allowed!
-
-    /*
-    var x int8 = 10
-    var y int16 = 40
-    fmt.Print(x + y) <-- no no!
-    */
+    var a int8 = 10
+    var b int16 = 40
+    // fmt.Print(a + b) <-- no no!
+    fmt.Println(a + int8(b)) // <-- yes yes!
 }
