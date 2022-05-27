@@ -18,7 +18,61 @@ func main() {
     // primitive_types()
     // constants()
     // numbers_etc()
-    arrays_and_slices()
+    // arrays_and_slices()
+    structs_and_maps()
+}
+func structs_and_maps() {
+    var person1 map[string]string = map[string]string {
+        "name": "Jelte",
+        "age": "26",
+    }
+    fmt.Printf("person1=%v\n", person1)
+    
+    var person2 = make(map[string]string)
+    person2 = map[string]string{"name": "Frenk",}
+    fmt.Printf("person2=%v\n", person2);
+    fmt.Printf("person1.name=%v\n", person1["name"])
+    fmt.Printf("person2.name=%v\n", person2["name"])
+
+    _ , has_age := person2["age"]
+    fmt.Printf("Does person2 have age? %v\n", has_age)
+    name, has_name := person2["name"]
+    fmt.Printf("Does person2 have name? %v %v\n", has_name, name)
+
+    // Structs
+
+    type Person struct {
+        age int
+        name string
+        size string
+    }
+
+    var jelte = Person {
+        age: 26,
+        name: "Jelte",
+        size: "Medium",
+    }
+    fmt.Printf("jelte=%v\n", jelte)
+
+    type Human struct {
+        rights bool
+        eyes string
+    }
+
+    type Student struct {
+        Person
+        Human
+        uni string
+        country string
+    }
+
+    var jelte2 = Student {
+        uni: "TU/e",
+        country: "NL",
+        Person: Person { age:26, name: "jelte", },
+        Human: Human { rights: true, eyes: "blue", },
+    }
+    fmt.Printf("jelte2=%v\n", jelte2)
 }
 
 func arrays_and_slices() {
