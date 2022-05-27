@@ -19,8 +19,45 @@ func main() {
     // constants()
     // numbers_etc()
     // arrays_and_slices()
-    structs_and_maps()
+    // structs_and_maps()
+    if_and_switch()
 }
+
+func if_and_switch() {
+    if true {
+        fmt.Println("I mean come on...")
+    }
+
+    var jeake = map[string]string {
+        "name": "Jelte",
+        "size": "Medium",
+    }
+
+    if name, has_name := jeake["name"] ; has_name {
+        fmt.Printf("name is present: %v\n", name) // name is block scoped!
+    }
+    
+    // nothing more special with the ifs
+
+    switch 3 {
+    case 2, 10, 5:
+        fmt.Println("two")
+    case 3:
+        fmt.Println("three")
+    default:
+        fmt.Println("default")
+    }
+    
+    i := 40
+    switch {
+    case i <= 100:
+        fmt.Println("<=100")
+        fallthrough
+    case i <= 1000:
+        fmt.Println("<=1000")
+    }
+}
+
 func structs_and_maps() {
     var person1 map[string]string = map[string]string {
         "name": "Jelte",
