@@ -22,12 +22,64 @@ func main() {
 }
 
 func arrays_and_slices() {
+    /*
+    Arrays are handled as values, not as references!
+    Copying an array copies all values, not just a reference!
+    */
     var my_grades = [2]float32 {9.5, 7.8} // contiguous in memory!
     fmt.Printf("My grades: %v\n", my_grades)
     
     var grades_no_size = [...]float32 {9.5, 7.8} // or without size
     grades_no_size[1] = 9.1
     fmt.Printf("Grades no size: %v\n", grades_no_size)
+
+    var names [3]string 
+    names[0] = "Jelte"
+    names[1] = "Deez"
+    names[2] = "Nuts"
+
+    fmt.Printf("%v has length %v\n", names, len(names))
+
+    new_names := names // so this is a copy?
+    new_names[0] = "69"
+
+    fmt.Printf("%v? That is unexpected!\n", new_names)
+
+    pnt_names := &names // so this is a pointer?
+    pnt_names[1] = "Pointed!"
+    
+    fmt.Printf("pnt_names = %v, names = %v\n", pnt_names, names)
+
+    // Slices!
+    
+    var slicey_boi = []int {2, 4, 8}
+    fmt.Printf("slicey_boi=%v, len=%v, cap=%v\n", slicey_boi, 
+        len(slicey_boi), cap(slicey_boi))
+
+    var first_two = slicey_boi[:2]
+    fmt.Printf("first_two=%v, len=%v, cap=%v\n", first_two, 
+        len(first_two), cap(first_two))
+
+    var last_one = slicey_boi[2:]
+    fmt.Printf("last_one=%v, len=%v, cap=%v\n", last_one, 
+        len(last_one), cap(last_one))
+
+    var made_slice = make([]int, 0, 20)
+    fmt.Printf("made_slice=%v, len=%v, cap=%v\n", made_slice, 
+        len(made_slice), cap(made_slice))
+    
+    made_slice = append(made_slice, 4)
+    fmt.Printf("made_slice=%v, len=%v, cap=%v\n", made_slice, 
+        len(made_slice), cap(made_slice))
+    
+    made_slice = append(made_slice, 5, 2, 523, 66, 23, 68)
+    fmt.Printf("made_slice=%v, len=%v, cap=%v\n", made_slice, 
+        len(made_slice), cap(made_slice))
+
+    var spread_me = []int { 4, 523}
+    made_slice = append(made_slice, spread_me...) // spread operator baby!
+    fmt.Printf("made_slice=%v, len=%v, cap=%v\n", made_slice, 
+        len(made_slice), cap(made_slice))
 }
 
 func numbers_etc() {
