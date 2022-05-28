@@ -20,7 +20,48 @@ func main() {
     // numbers_etc()
     // arrays_and_slices()
     // structs_and_maps()
-    if_and_switch()
+    // if_and_switch()
+    loops_and_stuff()
+}
+
+func loops_and_stuff() {
+    for i := 0 ; i < 2; i++ {
+        fmt.Println("simple loop")
+    }
+    
+    for i, j := 0, 0 ; i < 2; i, j = i+1, j+1 {
+        fmt.Println("two variable loop!")
+    }
+
+    for i := 0 ; i < 5 ; i++ {
+        i = 5
+        fmt.Println("i is immediately 5")
+    }
+
+    i := 1
+    for ; i < 2; i++ {
+        fmt.Println("no init?")
+    }
+
+    for ; i < 5 ; {
+        fmt.Println("this takes a while...")
+        i++
+    }
+    
+    for i < 6 {
+        fmt.Println("this takes a clean while...")
+        i++
+    }
+
+    for {
+        fmt.Println("this will go on forever")
+        break // or will it?
+    }
+
+    a := [3]int {42, 503, 33}
+    for key, value := range a { // iterator much?
+        fmt.Printf("key=%v, value=%v\n", key, value) 
+    }
 }
 
 func if_and_switch() {
