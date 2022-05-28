@@ -3,6 +3,9 @@ package main
 import (
     "fmt"
     "strconv"
+    "io/ioutil"
+    "log"
+    "net/http"
 )
 
 var toplevel int = 200 // first letter is lower case: package private
@@ -21,7 +24,51 @@ func main() {
     // arrays_and_slices()
     // structs_and_maps()
     // if_and_switch()
-    loops_and_stuff()
+    // loops_and_stuff()
+    i_panic()
+    defer_and_panic()
+    is_this_server()
+}
+
+func is_this_server() {
+    http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+       w.Write([]byte("Awesome!")) 
+    })
+    err := http.ListenAndServe(":3000", nil)
+    if err != nil {
+        panic(err.Error())
+    }
+}
+
+func i_panic() { // recovered from the panic!
+    fmt.Println("uh oh")
+    defer func() {
+        if e := recover() ; e != nil {
+            fmt.Println(e)
+        }
+    }()
+    panic("deez nuts")
+}
+
+func defer_and_panic() {
+    fmt.Println("start")
+    defer fmt.Println("deferred baby!")
+    defer fmt.Println("But wait?") // LIFO is weird, no?
+    fmt.Println("end")
+    example1()
+}
+
+func example1() {
+    response, fetchErr := http.Get("http://www.google.com/robots.txt")
+    defer response.Body.Close()
+    if fetchErr != nil {
+        log.Fatal(fetchErr)
+    }
+    content, readErr := ioutil.ReadAll(response.Body)
+    if readErr != nil {
+        log.Fatal(readErr)
+    }
+    fmt.Printf("response=%s", content)
 }
 
 func loops_and_stuff() {
