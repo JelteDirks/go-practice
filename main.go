@@ -28,7 +28,69 @@ func main() {
     // i_panic()
     // defer_and_panic()
     // is_this_server()
-    pointers_baby()
+    // pointers_baby()
+    a := 10
+    var b *int = func_func("Argument", &a, 10, 40 , 63)
+    fmt.Println(b)
+    fmt.Println(*b)
+    methods()
+}
+
+type Person struct {
+    name string
+}
+
+func (p *Person) cleanHello() {
+    fmt.Println("Hello from pointer ", p.name)
+    p.name = "override!"
+}
+
+func (p Person) hello() { // creates copy every time it is called!
+    fmt.Println("Hello ", p.name)
+    p.name = "no use"
+}
+
+func methods() {
+    p := Person {
+        name: "Jelte",
+    }
+    p.hello()
+    p.cleanHello()
+    fmt.Println(p.name)
+}
+
+func func_func(param string, point *int, more ...int) *int {
+    _, e := divide(10, 0)
+    if e != nil {
+        fmt.Println(e)
+    }
+    j, _ := divide(50, 4)
+    fmt.Println(j)
+
+    func() {
+        fmt.Println("IIFE exist!")
+    }()
+
+    for i := 0; i < 4; i++ {
+        func(n int) {
+            fmt.Println(n)
+        }(i)
+    }
+    fmt.Printf("%v %v\n", param, *point)
+    fmt.Printf("%v\n", more)
+    return &more[len(more) - 1] // copied to heap to persist value
+}
+
+func special_func() (this_is_returned int) {
+    this_is_returned = 50
+    return
+}
+
+func divide(a, b int) (int, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("Can not divide by 0")
+    }
+    return a / b, nil
 }
 
 func pointers_baby() {
