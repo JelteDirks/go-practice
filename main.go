@@ -25,9 +25,31 @@ func main() {
     // structs_and_maps()
     // if_and_switch()
     // loops_and_stuff()
-    i_panic()
-    defer_and_panic()
-    is_this_server()
+    // i_panic()
+    // defer_and_panic()
+    // is_this_server()
+    pointers_baby()
+}
+
+func pointers_baby() {
+    var a int = 22
+    var b *int = &a
+    *b = 10
+    fmt.Println(b)
+    fmt.Println(*b)
+    
+    var c *Deez
+    fmt.Println(c)
+    c = new(Deez)
+    fmt.Println(c)
+    c.nuts = "hah"
+    fmt.Println(c)
+    (*c).nuts = "gottem"
+    fmt.Println(c)
+}
+
+type Deez struct {
+    nuts string
 }
 
 func is_this_server() {
