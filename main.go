@@ -37,10 +37,42 @@ func main() {
     // fmt.Println(*b)
     // methods()
     // some_interfaces()
-    go_routines()
+    // go_routines()
+    // channels()
 }
 
 var wg = sync.WaitGroup{}
+
+func channels() {
+    ch := make(chan int)
+    wg.Add(2)
+
+    go func() {
+        n := <- ch 
+        fmt.Println(n)
+        n++
+        ch <- n
+        wg.Done()
+    }()
+
+    go func(ch chan<- int) {
+        ch <- 21 
+    }(ch)
+
+    go func(ch <-chan int) {
+        n := <- ch
+        fmt.Println(n)
+        wg.Done()
+    }(ch)
+    
+    wg.Wait()
+    close(ch)
+
+    for i := range ch {
+        fmt.Println(i)
+    }
+}
+
 func go_routines() {
     wg.Add(1)
     go parallel("copy value")
