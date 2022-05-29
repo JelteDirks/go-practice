@@ -6,6 +6,8 @@ import (
     "io/ioutil"
     "log"
     "net/http"
+    "sync"
+    "runtime"
 )
 
 var toplevel int = 200 // first letter is lower case: package private
@@ -34,7 +36,22 @@ func main() {
     // fmt.Println(b)
     // fmt.Println(*b)
     // methods()
-    some_interfaces()
+    // some_interfaces()
+    go_routines()
+}
+
+var wg = sync.WaitGroup{}
+func go_routines() {
+    wg.Add(1)
+    go parallel("copy value")
+    fmt.Println("Hello from boss") 
+    wg.Wait()
+    fmt.Printf("thread=%v\n", runtime.GOMAXPROCS(-1)) // returns last setting
+}
+
+func parallel(message string) {
+    fmt.Println(message)
+    wg.Done()
 }
 
 func some_interfaces() {
@@ -55,7 +72,7 @@ func (t *Together) do1() { // can only implement using pointer
     fmt.Printf("do1=%v\n", t.internal)
 }
 
-func (t *Together) do2() {
+func (t *Together) do2() { // can only implement using pointer 
     fmt.Printf("do2=%v\n", t.internal)
 }
 
