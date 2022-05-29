@@ -40,7 +40,7 @@ func main() {
 var wg = sync.WaitGroup{}
 
 func channels() {
-    ch := make(chan int)
+    ch := make(chan int) // use make(chan int, 20) for buffered chan
     wg.Add(2)
 
     go func() {
