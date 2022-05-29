@@ -29,11 +29,57 @@ func main() {
     // defer_and_panic()
     // is_this_server()
     // pointers_baby()
-    a := 10
-    var b *int = func_func("Argument", &a, 10, 40 , 63)
-    fmt.Println(b)
-    fmt.Println(*b)
-    methods()
+    // a := 10
+    // var b *int = func_func("Argument", &a, 10, 40 , 63)
+    // fmt.Println(b)
+    // fmt.Println(*b)
+    // methods()
+    some_interfaces()
+}
+
+func some_interfaces() {
+    var bb Bigboi = new(deeznuts)
+    bb.Shoutout("Jelte")
+    var t Composed = &Together {
+        internal: 40,
+    }
+    t.do1()
+    t.do2()
+}
+
+type Together struct {
+    internal int
+}
+
+func (t *Together) do1() { // can only implement using pointer 
+    fmt.Printf("do1=%v\n", t.internal)
+}
+
+func (t *Together) do2() {
+    fmt.Printf("do2=%v\n", t.internal)
+}
+
+type Composed interface {
+    Component1
+    Component2
+}
+
+type Component1 interface {
+    do1()
+}
+
+type Component2 interface {
+    do2()
+}
+
+type Bigboi interface { 
+    Shoutout(string) (int, error)
+}
+
+type deeznuts struct {}
+func (bb *deeznuts) Shoutout(s string) (int, error) {
+    fmt.Println("Holla", s)
+    return 0, nil
 }
 
 type Person struct {
