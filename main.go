@@ -31,10 +31,6 @@ func main() {
     // defer_and_panic()
     // is_this_server()
     // pointers_baby()
-    // a := 10
-    // var b *int = func_func("Argument", &a, 10, 40 , 63)
-    // fmt.Println(b)
-    // fmt.Println(*b)
     // methods()
     // some_interfaces()
     // go_routines()
@@ -189,6 +185,11 @@ func divide(a, b int) (int, error) {
 }
 
 func pointers_baby() {
+    a := 10
+    var b *int = func_func("Argument", &a, 10, 40 , 63)
+    fmt.Println(b)
+    fmt.Println(*b)
+    
     var a int = 22
     var b *int = &a
     *b = 10
